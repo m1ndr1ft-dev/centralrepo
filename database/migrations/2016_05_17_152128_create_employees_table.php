@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('agent_id')->unsigned()->index();
             $table->foreign('agent_id')->references('id')->on('agents')->ondelete('cascade');
             $table->string('name');
+            $table->string('email')->unique();
             $table->string('slug');
             $table->string('title');
             $table->timestamps();

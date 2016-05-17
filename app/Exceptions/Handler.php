@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return redirect()->guest('/login');
-//        return parent::render($request, $e);
+//        return redirect()->guest('/login');
+        return parent::render($request, $e);
     }
 }

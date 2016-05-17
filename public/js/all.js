@@ -31734,7 +31734,7 @@ $(window).scroll(function() {
 
 //JSON CALL TO HANDLE ADD/UPDATE REQUEST ON AGENTS
 $('document').ready(function(){
-    $('.agentsubmitbutton').click(function(e){
+    $('.submitbuttona').click(function(e){
         var form = $(this).parents('form:first');
         var method = '';
         if (form.has('input[name=_method]')) {
@@ -31749,7 +31749,6 @@ $('document').ready(function(){
             var name = form.find('input[name=name]').val();
             var email = form.find('input[name=email]').val();
             var industry = form.find('input[name=industry]').val();
-            var president = form.find('input[name=president]').val();
             var url = form.attr('action');
             console.log(url);
             var target = form.find('.success');
@@ -31757,12 +31756,12 @@ $('document').ready(function(){
                 url: url,
                 type: 'POST',
                 dataType: 'json',
-                data: {name:name, email:email, industry:industry, president:president, _token:_token}
+                data: {name:name, email:email, industry:industry, _token:_token}
               })
               .done(function(data) {
                 var success = data.responseJSON;
                 target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-                $('.agentsubmitbutton').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
+                $('.submitbuttona').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
               })
               .fail(function(data) {
                 var errors = data.responseJSON;
@@ -31771,7 +31770,7 @@ $('document').ready(function(){
                     errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
                 });
                 target.html(errorsHtml);
-                $('.agentsubmitbutton').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
+                $('.submitbuttona').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
               })
               .always(function() {
                 console.log("complete");
@@ -31785,24 +31784,22 @@ $('document').ready(function(){
             var name = form.find('input[name=name]').val();
             var email = form.find('input[name=email]').val();
             var industry = form.find('input[name=industry]').val();
-            var president = form.find('input[name=president]').val();
             var agentslug = $('.edit').parent('form:first').find('input[name=agentslug]').val();
             var url = form.attr('action');
             console.log(url);
             var _method = form.find('input[name=_method]').val();
             console.log("agentslug detected is:" + agentslug);
             var target = form.find('.success');
-            // jQuery.noConflict();
               $.ajax({
                 url: url,
                 type: 'PATCH',
                 dataType: 'json',
-                data: {name:name, email:email, industry:industry, president:president, _token:_token, _method: _method}
+                data: {name:name, email:email, industry:industry, _token:_token, _method: _method}
               })
               .done(function(data) {
                 var success = data.responseJSON;
                 target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-                $('.agentsubmitbutton').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
+                $('.submitbuttona').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
               })
               .fail(function(data) {
                 var errors = data.responseJSON;
@@ -31811,7 +31808,7 @@ $('document').ready(function(){
                     errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
                 });
                 target.html(errorsHtml);
-                $('.agentsubmitbutton').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
+                $('.submitbuttona').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
               })
               .always(function() {
                 console.log("complete");
@@ -31822,7 +31819,7 @@ $('document').ready(function(){
 
 //JSON CALL TO HANDLE ADD/UPDATE REQUEST ON EMPLOYEES
 $('document').ready(function(){
-	$('.empsubmitbutton').click(function(e){
+	$('.submitbuttone').click(function(e){
 		var form = $(this).parents('form:first');
 		var method = '';
 		if (form.has('input[name=_method]')) {
@@ -31837,7 +31834,6 @@ $('document').ready(function(){
 			var name = form.find('input[name=name]').val();
 			var email = form.find('input[name=email]').val();
 			var title = form.find('input[name=title]').val();
-			var company = form.find('input[name=company]').val();
 			var url = form.attr('action');
 			console.log(url);
 			var target = form.find('.success');
@@ -31845,12 +31841,12 @@ $('document').ready(function(){
 				url: url,
 				type: 'POST',
 				dataType: 'json',
-				data: {name:name, email:email, title:title, company:company, _token:_token}
+				data: {name:name, email:email, title:title, _token:_token}
 			})
 				.done(function(data) {
 					var success = data.responseJSON;
 					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-					$('.empsubmitbutton').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
+					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
 				})
 				.fail(function(data) {
 					var errors = data.responseJSON;
@@ -31859,7 +31855,7 @@ $('document').ready(function(){
 						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
 					});
 					target.html(errorsHtml);
-					$('.empsubmitbutton').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
+					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
 				})
 				.always(function() {
 					console.log("complete");
@@ -31873,7 +31869,6 @@ $('document').ready(function(){
 			var name = form.find('input[name=name]').val();
 			var email = form.find('input[name=email]').val();
 			var title = form.find('input[name=title]').val();
-			var company = form.find('input[name=company]').val();
 			var employeeslug = $('.edit').parent('form:first').find('input[name=employeeslug]').val();
 			var url = form.attr('action');
 			console.log(url);
@@ -31885,12 +31880,12 @@ $('document').ready(function(){
 				url: url,
 				type: 'PATCH',
 				dataType: 'json',
-				data: {name:name, email:email, title:title, company:company, _token:_token, _method: _method}
+				data: {name:name, email:email, title:title, _token:_token, _method: _method}
 			})
 				.done(function(data) {
 					var success = data.responseJSON;
 					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-					$('.empsubmitbutton').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
+					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
 				})
 				.fail(function(data) {
 					var errors = data.responseJSON;
@@ -31899,7 +31894,7 @@ $('document').ready(function(){
 						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
 					});
 					target.html(errorsHtml);
-					$('.empsubmitbutton').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
+					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
 				})
 				.always(function() {
 					console.log("complete");
@@ -32006,34 +32001,6 @@ $('document').ready(function(){
         // jQuery.noConflict();
         $('.editmodalwindow').modal('show');
     }
-    //
-    // /**
-    // * process the response, populating the form fields from the JSON data
-    // * @param {Object} response the JSON data parsed into an object
-    // */
-    // function process_response_subtasks(response){
-    //     //jQuery.noConflict();
-    //     var form = $(".editmodalwindow").find('form:first');
-    //     var url = form.attr('action');
-    //     console.log("form default url is " + url);
-    //     var agentslug = response['agentslug'];
-    //     var employeeslug = response['employeeslug'];
-    //     var host = window.location.host;
-    //     var pathname = window.location.pathname;
-    //     console.log("new agentslug is " +  agentslug);
-    //     console.log("new employeeslug is " +  employeeslug);
-    //     var updatedurl = 'http://' + host + '/agents' + '/' + agentslug + '/employee' + '/' + employeeslug + '/subtasks' + '/' + subtaskslug;
-    //     console.log(updatedurl); //for debug
-    //     form.attr('action', updatedurl);
-    //     var i;
-    //     console.dir(response);// for debug
-    //     form.find('#form-url').html(updatedurl);
-    //     for (i in response) {
-    //         form.find('[name="' + i + '"]').val(response[i]);
-    //     }
-    //     // jQuery.noConflict();
-    //     $('.editmodalwindow').modal('show');
-    // }
 });
 
 $('document').ready(function() {
