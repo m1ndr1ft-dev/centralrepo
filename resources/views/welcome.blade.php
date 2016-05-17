@@ -9,7 +9,7 @@
                         <h1>E2E | Central Repository</h1>
                         <p>World Largest Employee/Employer Database</p>
                         <p>
-                            <a href="{{ url('login') }}" class="btn btn-green">Agent/Employer Login</a>
+                            <a href="{{ url('login') }}" class="btn btn-green">User Login</a>
                             <a href="{{ url('register') }}" class="btn btn-orange">Register Here</a>
                         </p>
                     </div>

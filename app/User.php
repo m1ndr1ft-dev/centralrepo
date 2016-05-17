@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function agents() {
+        return $this->hasMany('App\Agent');
+    }
+
+    public function employees() {
+
+        return $this->hasManyThrough('App\Employee', 'App\Agent');
+    }
 }
