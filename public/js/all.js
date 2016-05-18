@@ -31734,21 +31734,22 @@ $(window).scroll(function() {
 
 //JSON CALL TO HANDLE ADD/UPDATE REQUEST ON AGENTS
 $('document').ready(function(){
-    $('.submitbuttona').click(function(e){
+    $('.submitbutton').click(function(e){
         var form = $(this).parents('form:first');
         var method = '';
+		console.log("LOL");
         if (form.has('input[name=_method]')) {
             method = form.find('input[name=_method]').val();
+			console.log("HELLO METHOD?");
             console.log(method);
         }
         if(method != 'PATCH') {
-            console.log("Post method detected, going to run this part of the script");
             $(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
             e.preventDefault();
             var _token = form.find('input[name=_token]').val();
             var name = form.find('input[name=name]').val();
-            var email = form.find('input[name=email]').val();
             var industry = form.find('input[name=industry]').val();
+            var founder = form.find('input[name=founder]').val();
             var url = form.attr('action');
             console.log(url);
             var target = form.find('.success');
@@ -31756,12 +31757,12 @@ $('document').ready(function(){
                 url: url,
                 type: 'POST',
                 dataType: 'json',
-                data: {name:name, email:email, industry:industry, _token:_token}
+                data: {name:name, industry:industry, founder:founder, _token:_token}
               })
               .done(function(data) {
                 var success = data.responseJSON;
                 target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-                $('.submitbuttona').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
+                $('.submitbutton').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
               })
               .fail(function(data) {
                 var errors = data.responseJSON;
@@ -31770,45 +31771,50 @@ $('document').ready(function(){
                     errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
                 });
                 target.html(errorsHtml);
-                $('.submitbuttona').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
+                $('.submitbutton').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
               })
               .always(function() {
                 console.log("complete");
               });
         }
         else if(method == 'PATCH') {
-            console.log("Patch method detected, going to run this part of the script");
             $(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
             e.preventDefault();
+			alert("AFTER AGENT SLUG");
             var _token = form.find('input[name=_token]').val();
             var name = form.find('input[name=name]').val();
-            var email = form.find('input[name=email]').val();
-            var industry = form.find('input[name=industry]').val();
+			var industry = form.find('input[name=industry]').val();
+			var founder = form.find('input[name=founder]').val();
             var agentslug = $('.edit').parent('form:first').find('input[name=agentslug]').val();
             var url = form.attr('action');
-            console.log(url);
             var _method = form.find('input[name=_method]').val();
             console.log("agentslug detected is:" + agentslug);
             var target = form.find('.success');
+			
+			
+			
               $.ajax({
                 url: url,
                 type: 'PATCH',
                 dataType: 'json',
-                data: {name:name, email:email, industry:industry, _token:_token, _method: _method}
+                data: {name:name, industry:industry, founder:founder, _token:_token, _method: _method}
               })
               .done(function(data) {
                 var success = data.responseJSON;
+				  alert("SUCCESS");
                 target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-                $('.submitbuttona').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
+                $('.submitbutton').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
               })
               .fail(function(data) {
                 var errors = data.responseJSON;
+				  alert("ERROR" + data.responseJSON);
                 var errorsHtml = " ";
                 $.each( errors, function( key, value ) {
+					alert(key + ' val: ' + value);
                     errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
                 });
                 target.html(errorsHtml);
-                $('.submitbuttona').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
+                $('.submitbutton').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
               })
               .always(function() {
                 console.log("complete");
@@ -31817,91 +31823,91 @@ $('document').ready(function(){
       });
 });
 
-//JSON CALL TO HANDLE ADD/UPDATE REQUEST ON EMPLOYEES
-$('document').ready(function(){
-	$('.submitbuttone').click(function(e){
-		var form = $(this).parents('form:first');
-		var method = '';
-		if (form.has('input[name=_method]')) {
-			method = form.find('input[name=_method]').val();
-			console.log(method);
-		}
-		if(method != 'PATCH') {
-			console.log("Post method detected, going to run this part of the script for emps");
-			$(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
-			e.preventDefault();
-			var _token = form.find('input[name=_token]').val();
-			var name = form.find('input[name=name]').val();
-			var email = form.find('input[name=email]').val();
-			var title = form.find('input[name=title]').val();
-			var url = form.attr('action');
-			console.log(url);
-			var target = form.find('.success');
-			$.ajax({
-				url: url,
-				type: 'POST',
-				dataType: 'json',
-				data: {name:name, email:email, title:title, _token:_token}
-			})
-				.done(function(data) {
-					var success = data.responseJSON;
-					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
-				})
-				.fail(function(data) {
-					var errors = data.responseJSON;
-					var errorsHtml = " ";
-					$.each( errors, function( key, value ) {
-						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
-					});
-					target.html(errorsHtml);
-					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
-				})
-				.always(function() {
-					console.log("complete");
-				});
-		}
-		else if(method == 'PATCH') {
-			console.log("Patch method detected, going to run this part of the script");
-			$(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
-			e.preventDefault();
-			var _token = form.find('input[name=_token]').val();
-			var name = form.find('input[name=name]').val();
-			var email = form.find('input[name=email]').val();
-			var title = form.find('input[name=title]').val();
-			var employeeslug = $('.edit').parent('form:first').find('input[name=employeeslug]').val();
-			var url = form.attr('action');
-			console.log(url);
-			var _method = form.find('input[name=_method]').val();
-			console.log("employeeslug detected is:" + employeeslug);
-			var target = form.find('.success');
-			// jQuery.noConflict();
-			$.ajax({
-				url: url,
-				type: 'PATCH',
-				dataType: 'json',
-				data: {name:name, email:email, title:title, _token:_token, _method: _method}
-			})
-				.done(function(data) {
-					var success = data.responseJSON;
-					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
-					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
-				})
-				.fail(function(data) {
-					var errors = data.responseJSON;
-					var errorsHtml = " ";
-					$.each( errors, function( key, value ) {
-						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
-					});
-					target.html(errorsHtml);
-					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
-				})
-				.always(function() {
-					console.log("complete");
-				});
-		}
-	});
-});
+// //JSON CALL TO HANDLE ADD/UPDATE REQUEST ON EMPLOYEES
+// $('document').ready(function(){
+// 	$('.submitbuttone').click(function(e){
+// 		var form = $(this).parents('form:first');
+// 		var method = '';
+// 		if (form.has('input[name=_method]')) {
+// 			method = form.find('input[name=_method]').val();
+// 			console.log(method);
+// 		}
+// 		if(method != 'PATCH') {
+// 			console.log("Post method detected, going to run this part of the script for emps");
+// 			$(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
+// 			e.preventDefault();
+// 			var _token = form.find('input[name=_token]').val();
+// 			var name = form.find('input[name=name]').val();
+// 			var email = form.find('input[name=email]').val();
+// 			var title = form.find('input[name=title]').val();
+// 			var url = form.attr('action');
+// 			console.log(url);
+// 			var target = form.find('.success');
+// 			$.ajax({
+// 				url: url,
+// 				type: 'POST',
+// 				dataType: 'json',
+// 				data: {name:name, email:email, title:title, _token:_token}
+// 			})
+// 				.done(function(data) {
+// 					var success = data.responseJSON;
+// 					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
+// 					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Add More!").attr('disabled', false);
+// 				})
+// 				.fail(function(data) {
+// 					var errors = data.responseJSON;
+// 					var errorsHtml = " ";
+// 					$.each( errors, function( key, value ) {
+// 						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
+// 					});
+// 					target.html(errorsHtml);
+// 					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Resend").attr('disabled', false);
+// 				})
+// 				.always(function() {
+// 					console.log("complete");
+// 				});
+// 		}
+// 		else if(method == 'PATCH') {
+// 			console.log("Patch method detected, going to run this part of the script");
+// 			$(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
+// 			e.preventDefault();
+// 			var _token = form.find('input[name=_token]').val();
+// 			var name = form.find('input[name=name]').val();
+// 			var email = form.find('input[name=email]').val();
+// 			var title = form.find('input[name=title]').val();
+// 			var employeeslug = $('.edit').parent('form:first').find('input[name=employeeslug]').val();
+// 			var url = form.attr('action');
+// 			console.log(url);
+// 			var _method = form.find('input[name=_method]').val();
+// 			console.log("employeeslug detected is:" + employeeslug);
+// 			var target = form.find('.success');
+// 			// jQuery.noConflict();
+// 			$.ajax({
+// 				url: url,
+// 				type: 'PATCH',
+// 				dataType: 'json',
+// 				data: {name:name, email:email, title:title, _token:_token, _method: _method}
+// 			})
+// 				.done(function(data) {
+// 					var success = data.responseJSON;
+// 					target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
+// 					$('.submitbuttone').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
+// 				})
+// 				.fail(function(data) {
+// 					var errors = data.responseJSON;
+// 					var errorsHtml = " ";
+// 					$.each( errors, function( key, value ) {
+// 						errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
+// 					});
+// 					target.html(errorsHtml);
+// 					$('.submitbuttone').html("<i class='fa fa-flash'></i>&nbsp;Retry!").attr('disabled', false);
+// 				})
+// 				.always(function() {
+// 					console.log("complete");
+// 				});
+// 		}
+// 	});
+// });
 
 //JSON CALL TO HANDLE EDIT REQUESTS ON AGENTS
 $('document').ready(function(){
@@ -31911,7 +31917,6 @@ $('document').ready(function(){
         var url = $(this).parents('form:first').attr('action');
         var agentslug = $(this).parents('form:first').find('input[name=agentslug]').val();
         var employeeslug = $(this).parents('form:first').find('input[name=employeeslug]').val();
-
         if (window.location.pathname == '/agents') {
             // jQuery.noConflict();
             $.ajax({
@@ -31956,10 +31961,15 @@ $('document').ready(function(){
     */
     function process_response_agents(response)
     {
+		alert("INSIDE METHOD");
         var form = $(".editmodalwindow").find('form:first');
+		console.log(form);
+		alert(form);
         var url = form.attr('action');
+		alert(url);
         console.log("form default url is " + url);
         var agentslug = response['agentslug'];
+		alert(agentslug);
         var host = window.location.host;
         var pathname = window.location.pathname;
         console.log("new agentslug is " +  agentslug);
@@ -31971,6 +31981,7 @@ $('document').ready(function(){
         form.find('#form-url').html(updatedurl);
         for (i in response) {
             form.find('[name="' + i + '"]').val(response[i]);
+
         }
         $('.editmodalwindow').modal('show');
     }

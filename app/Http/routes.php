@@ -13,6 +13,7 @@
 
 Route::auth();
 Route::get('/home', 'HomeController@index');
+
 /*
  * Redirects to home after successful log in.
  * Else, redirects to welcome page.
@@ -25,15 +26,30 @@ Route::get('/', function () {
     }
     return view('welcome');
 });
+
+/*
+ * Gives access to controller(s) once the user is signed in.
+ */
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::resource('agents', 'AgentController');
+    Route::model('agents', 'App\Agent');
 
+    Route::bind('agents', function($value, $route) {
+        return App\Agent::whereSlug($value)->first();
+    });
+
+
+    Route::get('agents/trashed', 'AgentController@trashed');
+//    Route::get('/agents/restoreall', 'AgentController@restoreAll');
+    Route::post('/agents/{agents}/edit', 'AgentController@edit');
+    Route::delete('/agents/{agents}/hide', 'AgentController@hide');
+
+    Route::resource('agents', 'AgentController');
     Route::resource('employees', 'EmployeeController');
 
 });
-Route::controllers([
 
+Route::controllers([
   'auth' => 'Auth\AuthController',
   'password' => 'Auth\PasswordController'
 ]);

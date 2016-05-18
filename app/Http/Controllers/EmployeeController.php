@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Str;
 
@@ -47,14 +45,16 @@ class EmployeeController extends Controller
     {
       $slug = Str::slug($request->name);
 
-      $employee = new Employee;
 
-      $employee->name = $request->name;
-      $employee->email = $request->email;
-      $employee->slug = $slug;
-      $employee->title = $request->title;
 
-      $employee->save();
+//      $employee = new Employee;
+//
+//      $employee->name = $request->name;
+//      $employee->slug = $slug;
+//      $employee->email = $request->email;
+//      $employee->title = $request->title;
+//
+//      $employee->save();
 
       $response = [
         'msg' => 'Awesome! close this modal window !'
@@ -66,14 +66,7 @@ class EmployeeController extends Controller
     {
       $slug = Str::slug($request->name);
 
-      $employee = new Employee;
-
-      $employee->name = $request->name;
-      $employee->email = $request->email;
-      $employee->slug = $slug;
-      $employee->title = $request->title;
-
-      $employee->save();
+      
 
       return redirect('employees')->with('success', 'Employee' . ucwords($employee->name) . ' has been successfully created!' );
     }

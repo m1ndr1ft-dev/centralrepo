@@ -28,7 +28,9 @@ class Agent extends Model
    */
   protected $fillable = [
     'name',
+    'slug',
     'industry',
+    'founder',
   ];
 
   public function user()

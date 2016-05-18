@@ -11,17 +11,18 @@
                                 <i class="fa fa-database" aria-hidden="true"></i><span>&nbsp;Login</span>
                             </div>
                             <div class="panel-body">
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+                                {{--@if (count($errors) > 0)--}}
+                                    {{--<div class="alert alert-danger">--}}
+                                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                                        {{--<strong>Whoops!</strong> There were some problems with your input.<br><br>--}}
+                                        {{--<ul>--}}
+                                            {{--@foreach ($errors->all() as $error)--}}
+                                                {{--<li>{{ $error }}</li>--}}
+                                            {{--@endforeach--}}
+                                        {{--</ul>--}}
+                                    {{--</div>--}}
+                                {{--@endif--}}
+
                                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
@@ -65,6 +66,9 @@
                                         <div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
                                             <a href="{{ url('/register') }}" class="btn btn-block btn-orange">Register</a>
                                         </div>
+                                    </div>
+                                    <div class="success margin-top-20">
+                                        @include('errors.errors')
                                     </div>
                                 </form>
                             </div>

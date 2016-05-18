@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="modal-body">
-                    @include('forms.create.employee')
+                    @include('forms.edit.employee')
                 </div>
                 <div class="modal-footer">
                     <a href="#" id="empbtn" class="btn btn-cyan submitbutton"><i class="fa fa-plus-circle" aria-hidden="true"></i>

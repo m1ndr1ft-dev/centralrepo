@@ -8,7 +8,6 @@
                     <div class="container bg-shadow" style="background-color: #434E60; opacity: 0.8;">
                         <h1>E2E | Central Repository</h1>
                         <p>Go to navigation bar to get started/manage records.</p>
-
                     </div>
                 </div>
             </div>

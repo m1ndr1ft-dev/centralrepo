@@ -1,22 +1,21 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="createagents">
+<div class="modal fade editmodalwindow" tabindex="-1" role="dialog" id="editagents">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::open(['method' => 'POST', 'action' => 'AgentController@store', 'class' => 'form-horizontal']) !!}
+            {!! Form::model($agent, ['method' => 'PATCH', 'action' => ['AgentController@update', $agent->id], 'class' => 'form-horizontal']) !!}
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add a new Agent/Employer</h4>
+                <h4 class="modal-title">Edit Agent/Employer</h4>
             </div>
 
             <div class="modal-body">
-                @include('forms.create.agent')
+                @include('forms.edit.agent')
             </div>
             <div class="modal-footer">
-                <a href="#" id="" class="btn btn-cyan submitbutton"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    &nbsp;{{ $submitTextButton }}</a>
-                {!! Form::close() !!}
+                <button class="btn btn-cyan submitbutton">{{ $submitTextButton }}</button>
                 <div class="success margin-top-20">
                     @include('errors.errors')
                 </div>
+                {!! Form::close() !!}
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

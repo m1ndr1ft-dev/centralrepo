@@ -26,6 +26,8 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Job Title</th>
+                                <th>Created at</th>
+                                <th>Updated at</th>
                                 {{--<th>Works For</th>--}}
                             </tr>
                             </thead>
@@ -38,7 +40,9 @@
                                     <td>{{ $employee->name }}</td>
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $employee->title }}</td>
-                                    {{--<td>{{ $employee->company }}</td>--}}
+                                    <td>{{ $employee->created_at->diffForHumans() }}</td>
+                                    <td>{{ $employee->updated_at->diffForHumans() }}</td>
+{{--                                    <td>{{ $employee->agent->name }}</td>--}}
                                 </tr>
                                 </tbody>
                             @endforeach
