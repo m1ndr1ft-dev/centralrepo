@@ -31780,7 +31780,6 @@ $('document').ready(function(){
         else if(method == 'PATCH') {
             $(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
             e.preventDefault();
-			alert("AFTER AGENT SLUG");
             var _token = form.find('input[name=_token]').val();
             var name = form.find('input[name=name]').val();
 			var industry = form.find('input[name=industry]').val();
@@ -31801,16 +31800,13 @@ $('document').ready(function(){
               })
               .done(function(data) {
                 var success = data.responseJSON;
-				  alert("SUCCESS");
                 target.html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>" + data.msg + "</p></div>");
                 $('.submitbutton').html("<i class='fa fa-check'></i>&nbsp;Done!").attr('disabled', false);
               })
               .fail(function(data) {
                 var errors = data.responseJSON;
-				  alert("ERROR" + data.responseJSON);
                 var errorsHtml = " ";
                 $.each( errors, function( key, value ) {
-					alert(key + ' val: ' + value);
                     errorsHtml += "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><p>"+ value[0] + "</p></div>"; //showing only the first error.
                 });
                 target.html(errorsHtml);
@@ -31961,15 +31957,11 @@ $('document').ready(function(){
     */
     function process_response_agents(response)
     {
-		alert("INSIDE METHOD");
         var form = $(".editmodalwindow").find('form:first');
 		console.log(form);
-		alert(form);
         var url = form.attr('action');
-		alert(url);
         console.log("form default url is " + url);
         var agentslug = response['agentslug'];
-		alert(agentslug);
         var host = window.location.host;
         var pathname = window.location.pathname;
         console.log("new agentslug is " +  agentslug);

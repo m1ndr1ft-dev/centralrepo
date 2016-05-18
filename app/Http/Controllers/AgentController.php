@@ -8,11 +8,28 @@ use App\Http\Controllers\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 
 class AgentController extends Controller
 {
+
+  protected $user;
+  protected $currenttime;
+  protected $today;
+
+  public function __construct()
+  {
+    $this->user = \Auth::user();
+    $this->currenttime = Carbon::now()->format('h:i a');
+    $this->today = Carbon::now()->formatLocalized('%a %d %b %y');
+
+    View::share('user', $this->user);
+    View::share('currenttime', $this->currenttime);
+    View::share('today', $this->today);
+  }
+
   /**
    * Display a listing of the resource.
    *
@@ -20,10 +37,7 @@ class AgentController extends Controller
    */
   public function index()
   {
-    $user = \Auth::user();
     $agents = \Auth::user()->agents()->orderby('created_at')->get();
-    $currenttime = Carbon::now()->format('h:i a');
-    $today = Carbon::now()->formatLocalized('%a %d %b %y');
     $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
 
     return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user', 'deletedAgents'));
@@ -82,12 +96,16 @@ class AgentController extends Controller
   /**
    * Display the specified resource.
    *
-   * @param  int  $id
+   * @param Agent $agent
    * @return Response
    */
-  public function show()
+  public function show(Agent $agent)
   {
-    return ("hello");
+
+    $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
+    $employees = $agent->employees()->orderby('created_at')->get();
+
+    return view('pages.agents.show', compact('agent', 'deletedAgents','employees', 'currenttime', 'today'));
   }
 
   /**
@@ -116,9 +134,8 @@ class AgentController extends Controller
     }
     else
     {
+
       $agents = \Auth::user()->agents()->orderby('created_at')->get();
-      $currenttime = Carbon::now()->format('h:i a');
-      $today = Carbon::now()->formatLocalized('%a %d %b %y');
 
       return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user'));
     }
@@ -181,20 +198,45 @@ class AgentController extends Controller
   }
 
   /**
+   * Restore the specified resource from the bin.
+   *
+   * @param Agent $agent
+   * @return Response
+   * @internal param int $id
+   */
+  public function restore(Agent $agent)
+  {
+    $agent->restore();
+
+    return redirect('agents/trashed')->with('success', 'Agent ' . $agent->name . ' has been successfully restored.');
+  }
+
+  /**
+   * Permanently deletes the specified resource from the table.
+   *
+   * @param Agent $agent
+   * @return Response
+   * @internal param int $id
+   */
+  public function delete(Agent $agent)
+  {
+    $agent->forceDelete();
+
+    return redirect('agents/trashed')->with('success', 'Agent ' . $agent->name . ' has been successfully restored.');
+  }
+
+  /**
    * Shows the specified resource from storage.
    *
    * @return Response
    */
   public function trashed()
   {
-//    $user = \Auth::user();
-//    $agents = \Auth::user()->agents()->orderby('created_at')->get();
-//    $currenttime = Carbon::now()->format('h:i a');
-//    $today = Carbon::now()->formatLocalized('%a %d %b %y');
-//    $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
-//
-//    return view('pages.agents.trashed', compact('agents', 'today', 'currenttime', 'user', 'deletedAgents'));
-    return ("hello");
+
+    $agents = \Auth::user()->agents()->orderby('created_at')->get();
+    $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
+
+    return view('pages.agents.trashed', compact('agents', 'today', 'currenttime', 'user', 'deletedAgents'));
   }
 
   /**
@@ -205,6 +247,7 @@ class AgentController extends Controller
   public function restoreAll()
   {
     \Auth::user()->agents()->onlyTrashed()->restore();
+
     return redirect('agents')->with("success", "Agent/Employers have been restored !");
   }
 
@@ -218,6 +261,4 @@ class AgentController extends Controller
   {
     //
   }
-
-
 }

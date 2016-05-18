@@ -26,7 +26,7 @@
             <div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
                 @if(count($deletedAgents))
                     <div class="table-responsive">
-                        <table class="table table-hover table-condensed">
+                        <table class="table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
                                 <th>Id</th>
@@ -49,20 +49,20 @@
                                     <td>{{ count($agent->employees()->get()) }}</td>
                                     <td>{{ $agent->created_at->diffForHumans() }}</td>
                                     <td>{{ $agent->updated_at->diffForHumans() }}</td>
-                                    {{--<td class="col-sm-3">--}}
-                                        {{--<ul class="list-inline col-sm-12" >--}}
-                                            {{--<li class="col-sm-3">--}}
-                                                {{--{!! Form::open(['method' => 'POST', 'action' => ['AgentController@edit', $agent->slug], 'class' => 'form-horizontal']) !!}--}}
-                                                {{--@include('partials.edit.agents', ['submitTextButton' => 'Edit'])--}}
-                                                {{--{!! Form::close() !!}--}}
-                                            {{--</li>--}}
-                                            {{--<li class="col-sm-3">--}}
-                                                {{--{!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@hide', $agent->slug], 'class' => 'form-horizontal']) !!}--}}
-                                                {{--@include('partials.delete.delete', ['submitTextButton' => 'Hide'])--}}
-                                                {{--{!! Form::close() !!}--}}
-                                            {{--</li>--}}
-                                        {{--</ul>--}}
-                                    {{--</td>--}}
+                                    <td class="col-sm-3">
+                                        <ul class="list-inline col-sm-12" >
+                                            <li class="col-sm-4">
+                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@restore', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                @include('partials.delete.delete', ['submitTextButton' => 'Restore'])
+                                                {!! Form::close() !!}
+                                            </li>
+                                            <li class="col-sm-3">
+                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@delete', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                @include('partials.delete.delete', ['submitTextButton' => 'Delete'])
+                                                {!! Form::close() !!}
+                                            </li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 </tbody>
                             @endforeach

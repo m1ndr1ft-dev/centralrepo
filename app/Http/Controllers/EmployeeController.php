@@ -45,22 +45,18 @@ class EmployeeController extends Controller
     {
       $slug = Str::slug($request->name);
 
-
-
-//      $employee = new Employee;
-//
-//      $employee->name = $request->name;
-//      $employee->slug = $slug;
-//      $employee->email = $request->email;
-//      $employee->title = $request->title;
-//
-//      $employee->save();
+      \Auth::user()->agents()->create([
+        'name' => $request->name,
+        'slug' => $slug,
+        'title' => $request->title,
+        'email' => $request->email,
+      ]);
 
       $response = [
         'msg' => 'Awesome! close this modal window !'
       ];
 
-      return \response()->json($response);
+      return response()->json($response);
     }
     else
     {

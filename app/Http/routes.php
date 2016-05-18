@@ -33,19 +33,30 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function() {
 
     Route::model('agents', 'App\Agent');
+    Route::model('employees', 'App\Employee');
 
     Route::bind('agents', function($value, $route) {
         return App\Agent::whereSlug($value)->first();
     });
 
+    Route::bind('employees', function($value, $route) {
+        return App\Employee::whereSlug($value)->first();
+    });
+
+    Route::bind('deletedAgents', function($value, $route) {
+        return App\Agent::onlyTrashed()->whereSlug($value)->first();
+    });
+
 
     Route::get('agents/trashed', 'AgentController@trashed');
-//    Route::get('/agents/restoreall', 'AgentController@restoreAll');
+    Route::delete('agents/{deletedAgents}/delete', 'AgentController@delete');
+    Route::delete('agents/{deletedAgents}/restore', 'AgentController@restore');
+    Route::get('/agents/restoreall', 'AgentController@restoreAll');
     Route::post('/agents/{agents}/edit', 'AgentController@edit');
     Route::delete('/agents/{agents}/hide', 'AgentController@hide');
 
     Route::resource('agents', 'AgentController');
-    Route::resource('employees', 'EmployeeController');
+    Route::resource('agents.employees', 'EmployeeController');
 
 });
 
