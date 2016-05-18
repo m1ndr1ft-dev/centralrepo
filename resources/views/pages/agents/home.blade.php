@@ -24,7 +24,7 @@
                         <table class="breadcrumb table table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
-                                <th>Id</th>
+                                {{--<th>Id</th>--}}
                                 <th>Name</th>
                                 <th>Industry</th>
                                 <th>Founder</th>
@@ -37,7 +37,7 @@
                             @foreach($agents as $agent)
                                 <tbody>
                                 <tr>
-                                    <td>{{ $agent->id }}</td>
+                                    {{--<td>{{ $agent->id }}</td>--}}
                                     <td><a href="{{ action('AgentController@show', $agent->slug) }}">{{ $agent->name }}</a></td>
                                     <td>{{ $agent->industry }}</td>
                                     <td>{{ $agent->founder }}</td>

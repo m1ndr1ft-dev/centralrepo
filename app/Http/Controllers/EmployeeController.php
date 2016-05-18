@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Agent;
 use App\Employee;
 use Carbon\Carbon;
 use App\Http\Requests;
@@ -37,15 +38,15 @@ class EmployeeController extends Controller
    * Store a newly created resource in storage.
    *
    * @param Requests\EmployeeRequest $request
+   * @param Agent $agent
    * @return Response
    */
-  public function store(Requests\EmployeeRequest $request)
+  public function store(Requests\EmployeeRequest $request, Agent $agent)
   {
     if($request->ajax())
     {
       $slug = Str::slug($request->name);
-
-      \Auth::user()->agents()->create([
+      $agent->employees()->create([
         'name' => $request->name,
         'slug' => $slug,
         'title' => $request->title,
@@ -61,9 +62,13 @@ class EmployeeController extends Controller
     else
     {
       $slug = Str::slug($request->name);
-
+      $agent->employees()->create([
+        'name' => $request->name,
+        'slug' => $slug,
+        'title' => $request->title,
+        'email' => $request->email,
+      ]);
       
-
       return redirect('employees')->with('success', 'Employee' . ucwords($employee->name) . ' has been successfully created!' );
     }
   }

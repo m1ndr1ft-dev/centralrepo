@@ -18,9 +18,6 @@
             <div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
                 <div class="pull-right">
                     <a href="#createemployees" class="btn btn-sm btn-green" data-toggle="modal"> <i class="fa fa-plus"></i>&nbsp;New Employee</a>
-                    {{--@if(count($deletedAgents))--}}
-                        {{--<a href="{{ url('agents/trashed') }}" class="btn btn-sm btn-red"> <i class="fa fa-trash"></i>&nbsp;Trash&nbsp;<span class="badge">{{ count($deletedAgents) }}</span></a>--}}
-                    {{--@endif--}}
                 </div>
             </div>
         </div>
@@ -31,7 +28,7 @@
                         <table class="breadcrumb table table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
-                                <th>Id</th>
+                                {{--<th>Id</th>--}}
                                 <th>Name</th>
                                 <th>Title</th>
                                 <th>Email</th>
@@ -43,7 +40,7 @@
                             @foreach($employees as $employee)
                                 <tbody>
                                 <tr>
-                                    <td>{{ $employee->id }}</td>
+                                    {{--<td>{{ $employee->id }}</td>--}}
                                     <td>{{ $employee->name }}</td>
                                     <td>{{ $employee->title }}</td>
                                     <td>{{ $employee->email }}</td>
@@ -52,12 +49,12 @@
                                     <td class="col-sm-3">
                                         <ul class="list-inline col-sm-12" >
                                             <li class="col-sm-3">
-                                                {!! Form::open(['method' => 'POST', 'action' => ['AgentController@edit', $agent->slug], 'class' => 'form-horizontal']) !!}
-                                                @include('partials.edit.agents', ['submitTextButton' => 'Edit'])
+                                                {!! Form::open(['method' => 'POST', 'action' => ['EmployeeController@edit', $agent->slug, $employee->slug], 'class' => 'form-horizontal']) !!}
+                                                @include('partials.edit.employees', ['submitTextButton' => 'Edit'])
                                                 {!! Form::close() !!}
                                             </li>
                                             <li class="col-sm-3">
-                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@hide', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@hide', $employee->slug], 'class' => 'form-horizontal']) !!}
                                                 @include('partials.delete.delete', ['submitTextButton' => 'Hide'])
                                                 {!! Form::close() !!}
                                             </li>
@@ -76,6 +73,6 @@
     </div>
     @include('modals.create.employees', ['submitTextButton' => 'ADD'])
     @if(count($employees))
-        @include('modals.edit.employees', ['submitTextButton' => 'Update'])
+{{--        @include('modals.edit.employees', ['submitTextButton' => 'Update'])--}}
     @endif
 @endsection

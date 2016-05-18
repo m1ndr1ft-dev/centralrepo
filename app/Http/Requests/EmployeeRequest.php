@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class EmployeeRequest extends Request
 {
     /**
@@ -13,7 +11,7 @@ class EmployeeRequest extends Request
      */
     public function authorize()
     {
-        return \Auth::check() ? true : false;
+        return true;
     }
 
     /**

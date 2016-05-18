@@ -57,7 +57,6 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#createagents" data-toggle="modal"><i class="fa fa-industry" aria-hidden="true"></i>Agent</a></li>
-                                <li><a href="#createemployees" data-toggle="modal"><i class="fa fa-user" aria-hidden="true"></i>Employee</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -66,7 +65,6 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/agents" data-toggle="modal"><i class="fa fa-industry" aria-hidden="true"></i>Agents</a></li>
-                                <li><a href="/employees" data-toggle="modal"><i class="fa fa-user" aria-hidden="true"></i>Employees</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

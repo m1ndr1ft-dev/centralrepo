@@ -49,14 +49,17 @@ Route::group(['middleware' => 'auth'], function() {
 
 
     Route::get('agents/trashed', 'AgentController@trashed');
+    Route::get('/agents/restoreall', 'AgentController@restoreAll');
+
     Route::delete('agents/{deletedAgents}/delete', 'AgentController@delete');
     Route::delete('agents/{deletedAgents}/restore', 'AgentController@restore');
-    Route::get('/agents/restoreall', 'AgentController@restoreAll');
-    Route::post('/agents/{agents}/edit', 'AgentController@edit');
     Route::delete('/agents/{agents}/hide', 'AgentController@hide');
 
-    Route::resource('agents', 'AgentController');
+    Route::post('/agents/{agents}/employees/{employees}/edit', 'EmployeeController@edit');
+    Route::post('/agents/{agents}/edit', 'AgentController@edit');
+
     Route::resource('agents.employees', 'EmployeeController');
+    Route::resource('agents', 'AgentController');
 
 });
 

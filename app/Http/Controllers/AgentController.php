@@ -43,7 +43,7 @@ class AgentController extends Controller
     return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user', 'deletedAgents'));
   }
 
-  /**
+  /**$agent
    * Show the form for creating a new resource.
    *
    * @return Response

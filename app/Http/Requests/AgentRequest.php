@@ -15,7 +15,7 @@ class AgentRequest extends Request
     public function authorize()
     {
         return true;
-//        return \Auth::check() ? true : false;
+//      return \Auth::check() ? true : false;
     }
 
     /**
