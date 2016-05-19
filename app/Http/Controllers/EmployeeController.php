@@ -21,7 +21,7 @@ class EmployeeController extends Controller
     $currenttime = Carbon::now()->format('h:i a');
     $today = Carbon::now()->formatLocalized('%a %d %b %y');
 
-    return view('pages.employees.home', compact('employees', 'today', 'currenttime'));
+    return view('pages.agents.home', compact('employees', 'today', 'currenttime'));
   }
 
   /**
@@ -69,7 +69,7 @@ class EmployeeController extends Controller
         'email' => $request->email,
       ]);
       
-      return redirect('employees')->with('success', 'Employee' . ucwords($employee->name) . ' has been successfully created!' );
+      return redirect('employees')->with('success', 'Employee' . ucwords($request->name) . ' has been successfully created!' );
     }
   }
 

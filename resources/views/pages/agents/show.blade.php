@@ -72,7 +72,7 @@
         </div>
     </div>
     @include('modals.create.employees', ['submitTextButton' => 'ADD'])
-    @if(count($employees))
+    {{--@if(count($employees))--}}
 {{--        @include('modals.edit.employees', ['submitTextButton' => 'Update'])--}}
-    @endif
+    {{--@endif--}}
 @endsection

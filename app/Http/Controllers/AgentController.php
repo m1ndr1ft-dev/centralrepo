@@ -37,6 +37,7 @@ class AgentController extends Controller
    */
   public function index()
   {
+    $user = \Auth::user();
     $agents = \Auth::user()->agents()->orderby('created_at')->get();
     $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
 
@@ -134,7 +135,7 @@ class AgentController extends Controller
     }
     else
     {
-
+      $user = \Auth::user();
       $agents = \Auth::user()->agents()->orderby('created_at')->get();
 
       return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user'));
