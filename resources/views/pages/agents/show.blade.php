@@ -28,7 +28,6 @@
                         <table class="breadcrumb table table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
-                                {{--<th>Id</th>--}}
                                 <th>Name</th>
                                 <th>Title</th>
                                 <th>Email</th>
@@ -40,7 +39,6 @@
                             @foreach($employees as $employee)
                                 <tbody>
                                 <tr>
-                                    {{--<td>{{ $employee->id }}</td>--}}
                                     <td>{{ $employee->name }}</td>
                                     <td>{{ $employee->title }}</td>
                                     <td>{{ $employee->email }}</td>

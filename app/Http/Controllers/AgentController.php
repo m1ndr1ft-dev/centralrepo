@@ -16,11 +16,13 @@ class AgentController extends Controller
 {
 
   protected $user;
+  protected $agents;
   protected $currenttime;
   protected $today;
 
   public function __construct()
   {
+
     $this->user = \Auth::user();
     $this->currenttime = Carbon::now()->format('h:i a');
     $this->today = Carbon::now()->formatLocalized('%a %d %b %y');
@@ -37,14 +39,13 @@ class AgentController extends Controller
    */
   public function index()
   {
-    $user = \Auth::user();
+
     $agents = \Auth::user()->agents()->orderby('created_at')->get();
     $deletedAgents = \Auth::user()->agents()->onlyTrashed()->get();
-
     return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user', 'deletedAgents'));
   }
 
-  /**$agent
+  /**
    * Show the form for creating a new resource.
    *
    * @return Response
@@ -64,8 +65,8 @@ class AgentController extends Controller
   {
     if($request->ajax())
     {
-      $slug = Str::slug($request->name);
 
+      $slug = Str::slug($request->name);
       \Auth::user()->agents()->create([
         'name' => $request->name,
         'slug' => $slug,
@@ -81,8 +82,8 @@ class AgentController extends Controller
     }
     else
     {
-      $slug = Str::slug($request->name);
 
+      $slug = Str::slug($request->name);
       \Auth::user()->agents()->create([
         'slug' => $slug,
         'name' => $request->name,
@@ -135,9 +136,8 @@ class AgentController extends Controller
     }
     else
     {
-      $user = \Auth::user();
-      $agents = \Auth::user()->agents()->orderby('created_at')->get();
 
+      $agents = \Auth::user()->agents()->orderby('created_at')->get();
       return view('pages.agents.home', compact('agents', 'today', 'currenttime', 'user'));
     }
   }
@@ -154,8 +154,8 @@ class AgentController extends Controller
   {
     if ($request->ajax())
     {
-      $slug = Str::slug($request->name);
 
+      $slug = Str::slug($request->name);
       $agent->update([
         'name' => $request->name,
         'slug' => $slug,
@@ -171,8 +171,8 @@ class AgentController extends Controller
     }
     else
     {
-      $slug = Str::slug($request->name);
 
+      $slug = Str::slug($request->name);
       $agent->update([
         'slug' => $slug,
         'name' => $request->name,
@@ -193,8 +193,8 @@ class AgentController extends Controller
    */
   public function hide(Agent $agent)
   {
-    $agent->delete();
 
+    $agent->delete();
     return redirect('agents')->with('success', 'Agent ' . $agent->name . ' has been successfully hidden.');
   }
 
@@ -207,8 +207,8 @@ class AgentController extends Controller
    */
   public function restore(Agent $agent)
   {
-    $agent->restore();
 
+    $agent->restore();
     return redirect('agents/trashed')->with('success', 'Agent ' . $agent->name . ' has been successfully restored.');
   }
 
@@ -221,8 +221,8 @@ class AgentController extends Controller
    */
   public function delete(Agent $agent)
   {
-    $agent->forceDelete();
 
+    $agent->forceDelete();
     return redirect('agents/trashed')->with('success', 'Agent ' . $agent->name . ' has been successfully restored.');
   }
 
@@ -247,8 +247,8 @@ class AgentController extends Controller
    */
   public function restoreAll()
   {
-    \Auth::user()->agents()->onlyTrashed()->restore();
 
+    \Auth::user()->agents()->onlyTrashed()->restore();
     return redirect('agents')->with("success", "Agent/Employers have been restored !");
   }
 

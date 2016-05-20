@@ -7,6 +7,7 @@ namespace App\Http\Requests;
  */
 class AgentRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,8 +15,7 @@ class AgentRequest extends Request
      */
     public function authorize()
     {
-        return true;
-//      return \Auth::check() ? true : false;
+      return \Auth::check() ? true : false;
     }
 
     /**

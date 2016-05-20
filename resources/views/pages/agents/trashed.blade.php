@@ -42,7 +42,6 @@
                             @foreach($deletedAgents as $agent)
                                 <tbody>
                                 <tr>
-                                    {{--<td>{{ $agent->id }}</td>--}}
                                     <td>{{ $agent->name }}</td>
                                     <td>{{ $agent->industry }}</td>
                                     <td>{{ $agent->founder }}</td>

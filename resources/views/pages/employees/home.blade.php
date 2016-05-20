@@ -28,12 +28,9 @@
                                 <th>Job Title</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                {{--<th>Works For</th>--}}
                             </tr>
                             </thead>
-
                             @foreach($employees as $employee)
-
                                 <tbody>
                                 <tr>
                                     <td>{{ $employee->id }}</td>
@@ -42,7 +39,6 @@
                                     <td>{{ $employee->title }}</td>
                                     <td>{{ $employee->created_at->diffForHumans() }}</td>
                                     <td>{{ $employee->updated_at->diffForHumans() }}</td>
-{{--                                    <td>{{ $employee->agent->name }}</td>--}}
                                 </tr>
                                 </tbody>
                             @endforeach

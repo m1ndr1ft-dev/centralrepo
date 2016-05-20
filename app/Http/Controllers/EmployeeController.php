@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 class EmployeeController extends Controller
 {
+
   /**
    * Display a listing of the resource.
    *
@@ -17,10 +18,10 @@ class EmployeeController extends Controller
    */
   public function index()
   {
+
     $employees = Employee::all();
     $currenttime = Carbon::now()->format('h:i a');
     $today = Carbon::now()->formatLocalized('%a %d %b %y');
-
     return view('pages.agents.home', compact('employees', 'today', 'currenttime'));
   }
 
@@ -45,6 +46,7 @@ class EmployeeController extends Controller
   {
     if($request->ajax())
     {
+
       $slug = Str::slug($request->name);
       $agent->employees()->create([
         'name' => $request->name,
@@ -61,6 +63,7 @@ class EmployeeController extends Controller
     }
     else
     {
+
       $slug = Str::slug($request->name);
       $agent->employees()->create([
         'name' => $request->name,
