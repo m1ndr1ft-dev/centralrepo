@@ -29,7 +29,6 @@
                         <table class="table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
-                                {{--<th>Id</th>--}}
                                 <th>Name</th>
                                 <th>Industry</th>
                                 <th>Founder</th>
@@ -51,12 +50,12 @@
                                     <td class="col-sm-3">
                                         <ul class="list-inline col-sm-12" >
                                             <li class="col-sm-5">
-                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@restore', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                {!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@restore', $agent->slug), 'class' => 'form-horizontal')) !!}
                                                 @include('partials.delete.delete', ['submitTextButton' => 'Restore'])
                                                 {!! Form::close() !!}
                                             </li>
                                             <li class="col-sm-5">
-                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@delete', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                {!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@delete', $agent->slug), 'class' => 'form-horizontal')) !!}
                                                 @include('partials.delete.delete', ['submitTextButton' => 'Delete'])
                                                 {!! Form::close() !!}
                                             </li>

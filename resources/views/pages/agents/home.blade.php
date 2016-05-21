@@ -45,12 +45,12 @@
                                     <td class="col-sm-3">
                                         <ul class="list-inline col-sm-12" >
                                             <li class="col-sm-3">
-                                                {!! Form::open(['method' => 'POST', 'action' => ['AgentController@edit', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                {!! Form::open(array('method' => 'POST', 'action' => array('AgentController@edit', $agent->slug), 'class' => 'form-horizontal')) !!}
                                                 @include('partials.edit.agents', ['submitTextButton' => 'Edit'])
                                                 {!! Form::close() !!}
                                             </li>
                                             <li class="col-sm-3">
-                                                {!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@hide', $agent->slug], 'class' => 'form-horizontal']) !!}
+                                                {!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@hide', $agent->slug), 'class' => 'form-horizontal')) !!}
                                                 @include('partials.delete.delete', ['submitTextButton' => 'Hide'])
                                                 {!! Form::close() !!}
                                             </li>
