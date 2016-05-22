@@ -30,7 +30,7 @@
                                 <th>Registered employees</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th>Actions</th>
+                                <th>Options</th>
                             </tr>
                             </thead>
                             @foreach($agents as $agent)
@@ -51,7 +51,7 @@
                                             </li>
                                             <li class="col-sm-3">
                                                 {!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@hide', $agent->slug), 'class' => 'form-horizontal')) !!}
-                                                @include('partials.delete.delete', ['submitTextButton' => 'Hide'])
+                                                @include('partials.delete.delete', ['submitTextButton' => 'Trash'])
                                                 {!! Form::close() !!}
                                             </li>
                                         </ul>

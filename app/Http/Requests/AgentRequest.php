@@ -2,12 +2,8 @@
 
 namespace App\Http\Requests;
 
-/**
- * @property mixed name
- */
 class AgentRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,10 +21,10 @@ class AgentRequest extends Request
      */
     public function rules()
     {
-        return [
+        return array(
           'name' => 'required|min:4|max:20',
           'industry' => 'required|min:4|max:20',
           'founder' => 'required|min:4|max:20',
-        ];
+        );
     }
 }

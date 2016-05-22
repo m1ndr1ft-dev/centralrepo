@@ -33,7 +33,7 @@
                                 <th>Email</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th>Actions</th>
+                                <th>Options</th>
                             </tr>
                             </thead>
                             @foreach($employees as $employee)
@@ -44,20 +44,20 @@
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $agent->created_at->diffForHumans() }}</td>
                                     <td>{{ $agent->updated_at->diffForHumans() }}</td>
-                                    {{--<td class="col-sm-3">--}}
-                                        {{--<ul class="list-inline col-sm-12" >--}}
+                                    <td class="col-sm-3">
+                                        <ul class="list-inline col-sm-12" >
+                                            <li class="col-sm-3">
+                                                {!! Form::open(array('method' => 'POST', 'action' => array('EmployeeController@edit', $agent->slug, $employee->slug), 'class' => 'form-horizontal')) !!}
+                                                @include('partials.edit.employees', ['submitTextButton' => 'Edit'])
+                                                {!! Form::close() !!}
+                                            </li>
                                             {{--<li class="col-sm-3">--}}
-                                                {{--{!! Form::open(['method' => 'POST', 'action' => ['EmployeeController@edit', $task->slug, $employee->slug], 'class' => 'form-horizontal']) !!}--}}
-                                                {{--@include('partials.edit.employees', ['submitTextButton' => 'Edit'])--}}
+                                                {{--{!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@hide', $employee->slug), 'class' => 'form-horizontal')) !!}--}}
+                                                {{--@include('partials.delete.delete', ['submitTextButton' => 'Trash'])--}}
                                                 {{--{!! Form::close() !!}--}}
                                             {{--</li>--}}
-                                            {{--<li class="col-sm-3">--}}
-                                                {{--{!! Form::open(['method' => 'DELETE', 'action' => ['AgentController@hide', $employee->slug], 'class' => 'form-horizontal']) !!}--}}
-                                                {{--@include('partials.delete.delete', ['submitTextButton' => 'Hide'])--}}
-                                                {{--{!! Form::close() !!}--}}
-                                            {{--</li>--}}
-                                        {{--</ul>--}}
-                                    {{--</td>--}}
+                                        </ul>
+                                    </td>
                                 </tr>
                                 </tbody>
                             @endforeach
@@ -70,7 +70,7 @@
         </div>
     </div>
     @include('modals.create.employees', ['submitTextButton' => 'ADD'])
-    {{--@if(count($employees))--}}
-{{--        @include('modals.edit.employees', ['submitTextButton' => 'Update'])--}}
-    {{--@endif--}}
+    @if(count($employees))
+        @include('modals.edit.employees', ['submitTextButton' => 'Update'])
+    @endif
 @endsection

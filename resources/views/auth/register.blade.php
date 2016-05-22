@@ -28,28 +28,24 @@
                                         <input type="text" class="form-control icon" name="name" value="{{ old('name') }}" placeholder="John Doe">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">E-Mail Address&nbsp;<i class="fa fa-envelope"></i></label>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="john@example.com">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Password&nbsp;<i class="fa fa-key"></i></label>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <input type="password" class="form-control" name="password" placeholder="1234">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Confirm Password&nbsp;<i class="fa fa-key"></i></label>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <input type="password" class="form-control icon" name="password_confirmation" placeholder="1234">
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <button type="submit" class="btn btn-block btn-green">
@@ -57,7 +53,6 @@
                                         </button>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
                                         <a href="{{ url('/login') }}" class="btn btn-block btn-cyan">Login</a>

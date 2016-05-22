@@ -32,15 +32,15 @@ Route::get('/', function () {
  */
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::model('agents', 'App\Agent');
     Route::model('employees', 'App\Employee');
-
-    Route::bind('agents', function($value, $route) {
-        return App\Agent::whereSlug($value)->first();
-    });
+    Route::model('agents', 'App\Agent');
 
     Route::bind('employees', function($value, $route) {
         return App\Employee::whereSlug($value)->first();
+    });
+
+    Route::bind('agents', function($value, $route) {
+        return App\Agent::whereSlug($value)->first();
     });
 
     Route::bind('deletedAgents', function($value, $route) {

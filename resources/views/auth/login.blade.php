@@ -19,7 +19,6 @@
                                             <input type="email" class="form-control icon" name="email" value="{{ old('email') }}" placeholder="email@example.com">
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 control-label">Password&nbsp;<i class="fa fa-key"></i>
                                         </label>
@@ -27,7 +26,6 @@
                                             <input type="password" class="form-control" name="password" placeholder="1234">
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="checkbox">
@@ -37,7 +35,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
                                             <button type="submit" class="btn btn-block btn-cyan" style="">

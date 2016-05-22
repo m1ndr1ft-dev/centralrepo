@@ -31732,7 +31732,7 @@ $(window).scroll(function() {
     var scrollh = $(this).scrollTop();    
 })(jQuery);
 
-//JSON CALL TO HANDLE ADD/UPDATE REQUEST ON AGENTS
+//CALL TO HANDLE ADD/UPDATE REQUEST ON AGENTS
 $('document').ready(function(){
     $('.submitbutton').click(function(e){
         var form = $(this).parents('form:first');
@@ -31815,7 +31815,7 @@ $('document').ready(function(){
               });
         }
       });
-	//Employee request
+	//CALL TO HANDLE ADD/UPDATE REQUEST ON EMPLOYEES
 	$('.empsubmitbutton').click(function(e){
 		var form = $(this).parents('form:first');
 		var method = '';
@@ -31858,7 +31858,6 @@ $('document').ready(function(){
 				});
 		}
 		else if(method == 'PATCH') {
-			alert("PATCH");
 			$(this).html("<i class='fa fa-spinner fa-spin'></i>&nbsp;Wait!").attr('disabled', true);
 			e.preventDefault();
 			var _token = form.find('input[name=_token]').val();
@@ -31868,13 +31867,13 @@ $('document').ready(function(){
 			var employeeslug = $('.edit').parent('form:first').find('input[name=employeeslug]').val();
 			var url = form.attr('action');
 			var _method = form.find('input[name=_method]').val();
-			console.log("agentslug detected is:" + agentslug);
+			console.log("employeeslug detected is:" + employeeslug);
 			var target = form.find('.success');
 			$.ajax({
 				url: url,
 				type: 'PATCH',
 				dataType: 'json',
-				data: {name:name, industry:industry, founder:founder, _token:_token, _method: _method}
+				data: {name:name, title:title, email:email, _token:_token, _method: _method}
 			})
 				.done(function(data) {
 					var success = data.responseJSON;
@@ -31897,7 +31896,7 @@ $('document').ready(function(){
 	});
 });
 
-//JSON CALL TO HANDLE EDIT REQUESTS ON RECORDS
+//CALL TO HANDLE EDIT REQUESTS ON RECORDS
 $('document').ready(function(){
     $('.edit').click(function(e) {
         e.preventDefault();
@@ -31906,7 +31905,6 @@ $('document').ready(function(){
         var agentslug = $(this).parents('form:first').find('input[name=agentslug]').val();
         var employeeslug = $(this).parents('form:first').find('input[name=employeeslug]').val();
         if (window.location.pathname == '/agents') {
-            // jQuery.noConflict();
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -31924,7 +31922,6 @@ $('document').ready(function(){
         }
 
         else if (window.location.pathname == ('/agents/' + agentslug)) {
-            // jQuery.noConflict();
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -31950,18 +31947,13 @@ $('document').ready(function(){
     function process_response_agents(response)
     {
         var form = $(".editmodalwindow").find('form:first');
-		console.log(form);
         var url = form.attr('action');
-        console.log("form default url is " + url);
         var agentslug = response['agentslug'];
         var host = window.location.host;
         var pathname = window.location.pathname;
-        console.log("new agentslug is " +  agentslug);
         var updatedurl = 'http://' + host + pathname + '/' +  agentslug;
-        console.log(updatedurl); //for debug
         form.attr('action', updatedurl);
         var i;
-        console.dir(response);// for debug
         form.find('#form-url').html(updatedurl);
         for (i in response) {
             form.find('[name="' + i + '"]').val(response[i]);
@@ -31978,38 +31970,29 @@ $('document').ready(function(){
     {
         var form = $(".editmodalwindow").find('form:first');
         var url = form.attr('action');
-        console.log("form default url is " + url);
         var agentslug = response['agentslug'];
         var employeeslug = response['employeeslug'];
         var host = window.location.host;
         var pathname = window.location.pathname;
-        console.log("new employeeslug is " +  employeeslug);
         var updatedurl = 'http://' + host + '/agents' + '/' + agentslug + '/employees' + '/' + employeeslug;
-        console.log(updatedurl); //for debug
         form.attr('action', updatedurl);
         var i;
-        console.dir(response);// for debug
         form.find('#form-url').html(updatedurl);
         for (i in response) {
             form.find('[name="' + i + '"]').val(response[i]);
         }
-        // jQuery.noConflict();
         $('.editmodalwindow').modal('show');
     }
 });
 
 $('document').ready(function() {
     $('#menu').click(function(){
-        console.log('menu clicked');
       $('#sidenav').toggleClass('sidebar-hidden sidebar-visible nimated ounceInRight');
     });
 });
 
 $('document').ready(function() {
     $('#sidenav a').click(function(event){
-        console.log('a tag clicked');
-      //event.preventDefault();
-      //$(this).parent('li').children('ul').toggleClass('hidden show animated bounceInRight');
       $(this).parent('li').children('ul').toggleClass('hidden show');
     });
 });
@@ -32022,30 +32005,14 @@ $('document').ready(function () {
 
 function setNavigation() {
   var host = window.location.href;
-  //var path = window.location.pathname;
-  //var url = host + path;
-  //console.log(url);
-  //path = path.replace(/\/$/, "");
-  //host = host.replace(/\/$#/, "");
-  //path = decodeURIComponent(path);
-  //console.log(path);
 
   $(".sidebar .nav a").each(function () {
       var href = $(this).attr('href');
-      //console.log(href);
-      //if (path.substring(0, href.length) === href) {
-      //    if (path === href) {
-          if (host === href) {
-              //var match = path.substring(0, href.length) + ' & ' + href
-              //console.log('match found between ' + match);
-              $(this).closest('li').addClass('active');
-              $(this).closest('ul').toggleClass('hidden visible');
-          }
-          //else {
-              //var match = host + ' & ' + href
-              //console.log('no match found between ' + match);
-          //}
-      //}
+	  if (host === href) {
+
+		  $(this).closest('li').addClass('active');
+		  $(this).closest('ul').toggleClass('hidden visible');
+	  }
   });
 
     $('#agents').on('show',{

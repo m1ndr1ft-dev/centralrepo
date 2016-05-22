@@ -19,19 +19,19 @@ class Agent extends Model
   /**
    * Protects a carbon instance from cascade
    */
-  protected $date = ['deleted_at'];
+  protected $date = array('deleted_at');
 
   /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
-  protected $fillable = [
+  protected $fillable = array(
     'name',
     'slug',
     'industry',
     'founder',
-  ];
+  );
 
   public function user()
   {

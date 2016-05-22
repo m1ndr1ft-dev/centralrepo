@@ -21,10 +21,10 @@ class EmployeeRequest extends Request
      */
     public function rules()
     {
-        return [
+        return array(
           'name' => 'required|min:3|max:30',
           'email' => 'required|email',
           'title' => 'required|max:20',
-        ];
+        );
     }
 }

@@ -26,7 +26,7 @@
             <div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
                 @if(count($deletedAgents))
                     <div class="table-responsive">
-                        <table class="table-hover table-condensed">
+                        <table class="breadcrumb table table-hover table-condensed">
                             <thead>
                             <tr class="text-capitalize roboto">
                                 <th>Name</th>
@@ -35,7 +35,7 @@
                                 <th>Registered employees</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th>Actions</th>
+                                <th>Options</th>
                             </tr>
                             </thead>
                             @foreach($deletedAgents as $agent)
@@ -67,7 +67,7 @@
                         </table>
                     </div>
                 @else
-                    <p>Sorry no agents or employers in the trash bin, go <a href="{{ url('agents') }}" class="">back</a></p>
+                    <p>Sorry no agents or employers in the trash bin, go <a href="{{ url('agents') }}" class="">back.</a></p>
                 @endif
             </div>
         </div>

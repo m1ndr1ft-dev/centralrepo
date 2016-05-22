@@ -12,21 +12,21 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = array(
       'name',
       'email',
       'password',
-    ];
+    );
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = array(
       'password',
       'remember_token',
-    ];
+    );
 
     public function agents() {
         return $this->hasMany('App\Agent');
