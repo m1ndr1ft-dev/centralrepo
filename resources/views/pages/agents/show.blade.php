@@ -51,11 +51,11 @@
                                                 @include('partials.edit.employees', ['submitTextButton' => 'Edit'])
                                                 {!! Form::close() !!}
                                             </li>
-                                            {{--<li class="col-sm-3">--}}
-                                                {{--{!! Form::open(array('method' => 'DELETE', 'action' => array('AgentController@hide', $employee->slug), 'class' => 'form-horizontal')) !!}--}}
-                                                {{--@include('partials.delete.delete', ['submitTextButton' => 'Trash'])--}}
-                                                {{--{!! Form::close() !!}--}}
-                                            {{--</li>--}}
+                                            <li class="col-sm-5">
+                                                {!! Form::open(array('method' => 'DELETE', 'action' => array('EmployeeController@delete', $agent->slug, $employee->slug), 'class' => 'form-horizontal')) !!}
+                                                @include('partials.delete.delete', ['submitTextButton' => 'Delete'])
+                                                {!! Form::close() !!}
+                                            </li>
                                         </ul>
                                     </td>
                                 </tr>

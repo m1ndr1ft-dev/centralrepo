@@ -191,6 +191,22 @@ class EmployeeController extends Controller
   }
 
   /**
+   * Permanently deletes the specified resource from the table.
+   *
+   * @param Agent $agent
+   * @param Employee $employee
+   * @return Response
+   */
+  public function delete(Agent $agent, Employee $employee)
+  {
+
+    $employee->forceDelete();
+
+    return redirect()->back();
+
+  }
+
+  /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id

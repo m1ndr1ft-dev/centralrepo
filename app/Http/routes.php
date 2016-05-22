@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('agents/trashed', 'AgentController@trashed');
     Route::get('/agents/restoreall', 'AgentController@restoreAll');
 
+    Route::delete('agents/{agents}/{employees}', 'EmployeeController@delete');
     Route::delete('agents/{deletedAgents}/delete', 'AgentController@delete');
     Route::delete('agents/{deletedAgents}/restore', 'AgentController@restore');
     Route::delete('/agents/{agents}/hide', 'AgentController@hide');
