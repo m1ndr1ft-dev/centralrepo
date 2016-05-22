@@ -26,7 +26,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+//  'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'pgsql',
 
     /*
     |--------------------------------------------------------------------------
@@ -77,6 +78,18 @@ return [
             'prefix' => '',
             'schema' => 'public',
         ],
+
+        'pgsql' => array(
+          'driver' => 'pgsql',
+          'host' => 'ec2-184-73-222-90.compute-1.amazonaws.com',
+          'port' => '5432',
+          'database' => 'devqjigpmi6aa9',
+          'username' => 'eryhaxjvebxwqk',
+          'password' => '12kt00UIllw7JgHyvY2nVl56VF',
+          'charset' => 'utf8',
+          'prefix' => '',
+          'schema' => 'public',
+        ),
 
     ],
 
